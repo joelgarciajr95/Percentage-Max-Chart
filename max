@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weightlifting Percentage Max Chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .input-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid #dee2e6;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        label {
+            font-weight: bold;
+            color: #495057;
+            font-size: 1.1rem;
+        }
+
+        input[type="number"] {
+            padding: 12px 15px;
+            border: 2px solid #ced4da;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            width: 150px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        .percentage {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .weight {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 1.1rem;
+        }
+
+        .reps {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .intensity {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .legend {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .legend h3 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .legend p {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💪 Weightlifting Percentage Max Chart</h1>
+        <p class="subtitle">Calculate your training weights based on your one-rep max</p>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="oneRepMax">Enter your 1RM:</label>
+                <input type="number" id="oneRepMax" placeholder="e.g., 225" min="1" step="1">
+                <span>lbs/kg</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <table id="percentageTable">
+                <thead>
+                    <tr>
+                        <th>Percentage</th>
+                        <th>Weight</th>
+                        <th>Typical Reps</th>
+                        <th>Training Zone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table content will be generated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="legend">
+            <h3>Training Zone Guide:</h3>
+            <p><strong>Strength (85-100%):</strong> Low reps, high intensity. Focus on maximal strength development.</p>
+            <p><strong>Power (80-90%):</strong> Moderate reps, high intensity. Develops explosive power and strength.</p>
+            <p><strong>Hypertrophy (65-85%):</strong> Moderate to high reps. Optimal for muscle growth and size.</p>
+            <p><strong>Endurance (50-70%):</strong> High reps, lower intensity. Builds muscular endurance and conditioning.</p>
+        </div>
+    </div>
+
+    <script>
+        const percentageData = [
+            { percentage: 100, reps: '1', zone: 'Max Strength' },
+            { percentage: 95, reps: '2', zone: 'Max Strength' },
+            { percentage: 90, reps: '3-4', zone: 'Strength' },
+            { percentage: 87, reps: '4-5', zone: 'Strength' },
+            { percentage: 85, reps: '5-6', zone: 'Strength' },
+            { percentage: 83, reps: '6', zone: 'Power/Strength' },
+            { percentage: 80, reps: '7-8', zone: 'Power' },
+            { percentage: 77, reps: '8-9', zone: 'Power/Hypertrophy' },
+            { percentage: 75, reps: '9-10', zone: 'Hypertrophy' },
+            { percentage: 73, reps: '10-11', zone: 'Hypertrophy' },
+            { percentage: 70, reps: '11-12', zone: 'Hypertrophy' },
+            { percentage: 67, reps: '12-13', zone: 'Hypertrophy' },
+            { percentage: 65, reps: '13-15', zone: 'Hypertrophy/Endurance' },
+            { percentage: 60, reps: '15-17', zone: 'Endurance' },
+            { percentage: 55, reps: '17-20', zone: 'Endurance' },
+            { percentage: 50, reps: '20+', zone: 'Endurance' }
+        ];
+
+        function updateTable() {
+            const oneRepMax = parseFloat(document.getElementById('oneRepMax').value) || 0;
+            const tbody = document.querySelector('#percentageTable tbody');
+            
+            tbody.innerHTML = '';
+            
+            percentageData.forEach(data => {
+                const weight = Math.round(oneRepMax * (data.percentage / 100));
+                const row = tbody.insertRow();
+                
+                row.innerHTML = `
+                    <td class="percentage">${data.percentage}%</td>
+                    <td class="weight">${weight || '---'}</td>
+                    <td class="reps">${data.reps}</td>
+                    <td class="intensity">${data.zone}</td>
+                `;
+            });
+        }
+
+        document.getElementById('oneRepMax').addEventListener('input', updateTable);
+        
+        // Initialize table with empty values
+        updateTable();
+        
+        // Set default value for demonstration
+        document.getElementById('oneRepMax').value = 225;
+        updateTable();
+    </script>
+</body>
+</html>
